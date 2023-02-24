@@ -222,7 +222,10 @@ namespace ddg{
         {
             for(int i = aux.size() - 1; i>=0; --i)
             {
-                ret = ret*2 + aux[i];
+                if(aux[i] == 0 || aux[i] == 1)
+                  ret = ret*2 + aux[i];
+                else
+                    throw std::runtime_error("Not binary");
             }
         }
 
@@ -251,6 +254,18 @@ namespace ddg{
         }
 
         return ret;
+    }
+
+    std::string base16(std::string number)
+    {
+        int ret = base10(number);
+        std::string trueret = base16(ret);
+        return trueret;
+    }
+
+    std::string base16(const char* number)
+    {
+        return base16(std::string(number));
     }
 }
 
