@@ -12,15 +12,13 @@ namespace ddg{
 
         int_type ret = 0;
         std::vector<int_type> aux;
-        int index = 0;
 
         while(number>0)
         {
             aux.push_back(number%2);
             number = number/2;
-            index++;
         }
-        for(int i = index-1; i>=0; --i)
+        for(int i = aux.size() - 1; i>=0; --i)
         {
             ret = ret*10 + aux[i];
         }
@@ -35,8 +33,6 @@ namespace ddg{
         int_type ret = 0;
         std::vector<int_type> aux;
         std::vector<int> aux3;
-        int index = 0;
-        int index3 = 0;
 
         while(number.length()>0)
         {
@@ -45,9 +41,8 @@ namespace ddg{
             else
                 aux.push_back(number[number.length() - 1] - 48);
             number.pop_back();
-            index++;
         }
-        for(int i = index - 1; i>=0; --i)
+        for(int i = aux.size() - 1; i>=0; --i)
         {
             std::vector<int_type> aux2 = {};
             while(aux[i]>0)
@@ -59,10 +54,9 @@ namespace ddg{
             {
                 std::cout<<aux2[i]<<'\n';
                 aux3.push_back(aux2[i]);
-                index3++;
-            }
+            }                
         }
-        for(int i = 0; i<index3; ++i)
+        for(int i = 0; i<aux3.size(); ++i)
         {
             ret = ret*10 + aux3[i];
         }
@@ -77,15 +71,13 @@ namespace ddg{
 
         std::string ret = "";
         std::vector<int_type> aux;
-        int index = 0;
 
         while(number>0)
         {
             aux.push_back(number%2);
             number = number/2;
-            index++;
         }
-        for(int i = index - 1; i>=0; --i)
+        for(int i = aux.size() - 1; i>=0; --i)
         {
             ret = ret + (char)(aux[i]+'0');
         }
@@ -93,19 +85,18 @@ namespace ddg{
         return ret;
     }
 
+    template<>
     std::string base2_s(std::string number)
     {
         std::string ret = "";
         std::vector<char> aux;
-        int index = 0;
 
         while(number.length()>0)
         {
             aux.push_back(number[number.length() - 1]);
             number.pop_back();
-            index++;
         }
-        for(int i = index - 1; i>=0; --i)
+        for(int i = aux.size() - 1; i>=0; --i)
         {
             switch(aux[i]){
                 case '0': 
@@ -168,13 +159,17 @@ namespace ddg{
         return ret.substr(j);
     }
 
+    template<>
+    std::string base2_s(const char* number)
+    {
+        return base2_s(std::string(number));
+    }
 
     template <typename T = int>
     T base10(T number)
     {
         using int_type = T;
 
-        int index = 0;
         std::vector<int_type> aux;
         int_type ret = 0;
 
@@ -184,12 +179,11 @@ namespace ddg{
             {
                  aux.push_back(number%10);
                  number = number/10;
-                 index++;
             }
             else
                 throw std::runtime_error("Number it's not binary");
         }
-        for(int i = index - 1; i>=0; --i)
+        for(int i = aux.size() - 1; i>=0; --i)
         {
             ret = ret*2 + aux[i];
         }
@@ -204,20 +198,32 @@ namespace ddg{
 
         int_type ret = 0;
         std::vector<int_type> aux;
-        int index = 0;
+        int isHex = 0;
 
         while(number.length()>0)
         {
             if(number[number.length()-1]-48 > 9)
+            {
                 aux.push_back(number[number.length() - 1] - 55);
+                isHex = 1;
+            }
             else
                 aux.push_back(number[number.length()-1]-48);
             number.pop_back();
-            index++;
         }
-        for(int i = index - 1; i>=0; --i)
+        if(isHex)
         {
-            ret = ret*16 + aux[i];
+            for(int i = aux.size() - 1; i>=0; --i)
+            {
+                ret = ret*16 + aux[i];
+            }
+        }
+        else
+        {
+            for(int i = aux.size() - 1; i>=0; --i)
+            {
+                ret = ret*2 + aux[i];
+            }
         }
 
         return ret;
