@@ -4,12 +4,12 @@
 ####         -base2(int_type) (takes an int parameter of chosen type and returns a binary int of the same type)
 ####         -base2(std::string ) or base2(const char*) (takes a string parameter of base16 and returns a binary int)
 
-### **These 2 functions can be used only for __small__ decimal and hexadecimal numbers**
+### **These 2 functions can be used only for _small_ decimal and hexadecimal numbers**
 
 ####         -base2_s(int_type) (same as base2() but returns a string)
 ####         -base2_s(std::string) or base2_s(const char*) (for hexa)
 
-### **These 2 functions are used for __big__ numbers too**
+### **These 2 functions are used for _big_ numbers too**
 
 ### 2. base10 =
 ####          -base10(int_type) (takes an int in binary format)
