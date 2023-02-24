@@ -37,6 +37,7 @@ namespace ddg{
         std::vector<int> aux3;
         int index = 0;
         int index3 = 0;
+
         while(number.length()>0)
         {
             if(number[number.length()-1]-48 > 9)
@@ -65,8 +66,10 @@ namespace ddg{
         {
             ret = ret*10 + aux3[i];
         }
+
         return ret;
     }
+
     template <typename T>
     std::string base2_s(T number)
     {
@@ -75,6 +78,7 @@ namespace ddg{
         std::string ret = "";
         std::vector<int_type> aux;
         int index = 0;
+
         while(number>0)
         {
             aux.push_back(number%2);
@@ -85,7 +89,83 @@ namespace ddg{
         {
             ret = ret + (char)(aux[i]+'0');
         }
+
         return ret;
+    }
+
+    std::string base2_s(std::string number)
+    {
+        std::string ret = "";
+        std::vector<char> aux;
+        int index = 0;
+
+        while(number.length()>0)
+        {
+            aux.push_back(number[number.length() - 1]);
+            number.pop_back();
+            index++;
+        }
+        for(int i = index - 1; i>=0; --i)
+        {
+            switch(aux[i]){
+                case '0': 
+                    ret = ret + "0000";
+                    break;
+                case '1':
+                    ret = ret + "0001";
+                    break;
+                case '2':
+                    ret = ret + "0010";
+                    break;
+                case '3':
+                    ret = ret + "0011";
+                    break;
+                case '4':
+                    ret = ret + "0100";
+                    break;
+                case '5':
+                    ret = ret + "0101";
+                    break;
+                case '6':
+                    ret = ret + "0110";
+                    break;
+                case '7':
+                    ret = ret + "0111";
+                    break;
+                case '8':
+                    ret = ret + "1000";
+                    break;
+                case '9':
+                    ret = ret + "1001";
+                    break;
+                case 'A':
+                    ret = ret + "1010";
+                    break;
+                case 'B':
+                    ret = ret + "1011";
+                    break;
+                case 'C':
+                    ret = ret + "1100";
+                    break;
+                case 'D':
+                    ret = ret + "1101";
+                    break;
+                case 'E':
+                    ret = ret + "1110";
+                    break;
+                case 'F':
+                    ret = ret + "1111";
+                    break;
+            }
+        }
+        
+        int j = 0;
+        while(ret[j] == '0')
+        {
+            j++;
+        }
+
+        return ret.substr(j);
     }
 
 
@@ -108,7 +188,6 @@ namespace ddg{
             }
             else
                 throw std::runtime_error("Number it's not binary");
-
         }
         for(int i = index - 1; i>=0; --i)
         {
@@ -122,9 +201,11 @@ namespace ddg{
     T base10(std::string number)
     {
         using int_type = T;
+
         int_type ret = 0;
         std::vector<int_type> aux;
         int index = 0;
+
         while(number.length()>0)
         {
             if(number[number.length()-1]-48 > 9)
@@ -138,6 +219,7 @@ namespace ddg{
         {
             ret = ret*16 + aux[i];
         }
+
         return ret;
     }
 
@@ -145,7 +227,8 @@ namespace ddg{
     std::string base16(T number)
     {
         std::vector<char> aux;
-        std::string ret;
+        std::string ret = "";
+
         while(number > 0)
         {
             auto remainder = number % 16;
@@ -160,6 +243,7 @@ namespace ddg{
         {
             ret = ret + aux[i];
         }
+
         return ret;
     }
 }
